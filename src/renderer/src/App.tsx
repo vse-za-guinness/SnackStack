@@ -59,7 +59,7 @@ function App(): React.ReactElement {
       if (existing >= 0) {
         return prev.map((i, idx) => idx === existing ? { ...i, qty: i.qty + 1 } : i)
       }
-      return [...prev, { id: Date.now(), name, qty: 1 }]
+      return [...prev, { id: Date.now(), name, qty: 1, addedAt: Date.now() }]
     })
     setPantryInput('')
   }
@@ -108,7 +108,7 @@ function App(): React.ReactElement {
       if (existing >= 0) {
         return prev.map((i, idx) => idx === existing ? { ...i, qty: i.qty + 1 } : i)
       }
-      return [...prev, { id: Date.now(), name, qty: 1, done: false }]
+      return [...prev, { id: Date.now(), name, qty: 1, addedAt: Date.now() }]
     })
     setShopInput('')
   }

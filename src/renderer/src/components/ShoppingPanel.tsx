@@ -1,10 +1,13 @@
 import React from 'react'
+import { formatDistanceToNow } from 'date-fns'
+
 
 interface ShopItem {
   id: number
   name: string
   qty: number
   done: boolean
+  addedAt: number
 }
 
 interface Props {

@@ -1,9 +1,11 @@
 import React from 'react'
+import { formatDistanceToNow } from 'date-fns'
 
 interface PantryItem {
   id: number
   name: string
   qty: number
+  addedAt: number
 }
 
 interface Props {
@@ -51,6 +53,9 @@ export default function PantryPanel({
                   <span className="item-name">
                     {item.name}
                     {item.qty <= 1 && <span className="low-stock">low</span>}
+                    <span className="item-date">
+                      added {formatDistanceToNow(item.addedAt, { addSuffix: true })}
+                    </span>
                   </span>
                   <div className="qty-ctrl">
                     <button className="qty-btn" onClick={() => chgPantry(i, -1)}>−</button>
