@@ -65,11 +65,19 @@ function App(): React.ReactElement {
     setPantryInput('')
   }
 
-  const chgPantry = (index: number, delta: number): void => {
-    setPantry(prev => prev.map((i, idx) =>
-      idx === index ? { ...i, qty: Math.max(1, i.qty + delta) } : i
-    ))
+const chgPantry = (index: number, delta: number): void => {
+  const item = pantry[index]
+  if (item.qty === 1 && delta === -1) {
+    if (window.confirm(`Remove "${item.name}" from pantry?`)) {
+      removePantry(index)
+    }
+    return
   }
+  setPantry(prev => prev.map((i, idx) =>
+    idx === index ? { ...i, qty: Math.max(1, i.qty + delta) } : i
+  ))
+}
+
 
   const removePantry = (index: number): void => {
     setPantry(prev => prev.filter((_, idx) => idx !== index))
@@ -114,11 +122,18 @@ function App(): React.ReactElement {
     setShopInput('')
   }
 
-  const chgShop = (index: number, delta: number): void => {
-    setShopping(prev => prev.map((i, idx) =>
-      idx === index ? { ...i, qty: Math.max(1, i.qty + delta) } : i
-    ))
+const chgShop = (index: number, delta: number): void => {
+  const item = shopping[index]
+  if (item.qty === 1 && delta === -1) {
+    if (window.confirm(`Remove "${item.name}" from shopping list?`)) {
+      removeShop(index)
+    }
+    return
   }
+  setShopping(prev => prev.map((i, idx) =>
+    idx === index ? { ...i, qty: Math.max(1, i.qty + delta) } : i
+  ))
+}
 
   const toggleShop = (index: number): void => {
     setShopping(prev => prev.map((i, idx) =>
