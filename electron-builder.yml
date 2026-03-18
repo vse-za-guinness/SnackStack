@@ -1,0 +1,41 @@
+# electron-builder.yml
+appId: com.banu.snackstack
+productName: SnackStack
+copyright: "Copyright 2026"
+directories:
+  output: app-installer # installer files go here
+
+files:
+  - out/**/* # compiled app files
+# Windows
+win:
+  icon: resources/snackstackicon.png
+  target:
+    - target: nsis # produces a .exe setup wizard
+      arch: [x64]
+    - target: msi # produces an enterprise .msi
+      arch: [x64]
+
+nsis:
+  oneClick: false # show the install wizard
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: "SnackStack"
+
+msi:
+  oneClick: false
+  perMachine: false # install per-user, no admin required
+
+# macOS
+mac:
+  icon: resources/snackstackicon.png
+  category: public.app-category.productivity
+  target:
+    - target: dmg
+      arch: [x64, arm64] # Intel and Apple Silicon
+
+dmg:
+  window:
+    width: 540
+    height: 380
