@@ -8,6 +8,7 @@ interface PantryItem {
   id: number
   name: string
   qty: number
+  addedAt: number
 }
 
 interface ShopItem {
@@ -108,7 +109,7 @@ function App(): React.ReactElement {
       if (existing >= 0) {
         return prev.map((i, idx) => idx === existing ? { ...i, qty: i.qty + 1 } : i)
       }
-      return [...prev, { id: Date.now(), name, qty: 1, addedAt: Date.now() }]
+      return [...prev, { id: Date.now(), name, qty: 1, done: false }]
     })
     setShopInput('')
   }
@@ -137,7 +138,7 @@ function App(): React.ReactElement {
       if (existing >= 0) {
         return prev.map((i, idx) => idx === existing ? { ...i, qty: i.qty + item.qty } : i)
       }
-      return [...prev, { id: Date.now(), name: item.name, qty: item.qty }]
+      return [...prev, { id: Date.now(), name: item.name, qty: item.qty, addedAt: Date.now() }]
     })
     setShopping(prev => prev.filter((_, idx) => idx !== index))
     setActiveCtx(null)
